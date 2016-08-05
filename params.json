@@ -1,6 +1,6 @@
 {
   "name": "Horsepill",
   "tagline": "HORSEPILL rootkit PoC",
-  "body": "# HORSEPILL: a New Kind of Linux Rootkit\r\nThere will be content here, as soon as my [BH USA talk](https://www.blackhat.com/us-16/briefings/schedule/#horse-pill-a-new-type-of-linux-rootkit-3370) is over.",
+  "body": "# HORSEPILL: a New Kind of Linux Rootkit\r\nSee the link for code to get the code.  As presented at my [BH USA talk](https://www.blackhat.com/us-16/briefings/schedule/#horse-pill-a-new-type-of-linux-rootkit-3370).  Better web page to be put in place post-vegas.  All code is there.",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
